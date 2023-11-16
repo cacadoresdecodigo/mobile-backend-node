@@ -1,16 +1,16 @@
 const express = require("express");
 const ClienteController = require("./controllers/ClientesController");
-// const cors = require("cors");
+const cors = require("cors");
 
 const server = express();
-// server.use(
-//   cors({
-//     origin: "*", // Substitua pelo domínio do seu frontend
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true, // Habilita o envio de cookies pela origem
-//     optionsSuccessStatus: 204,
-//   })
-// );
+server.use(
+  cors({
+    origin: "*", // Substitua pelo domínio do seu frontend
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Habilita o envio de cookies pela origem
+    optionsSuccessStatus: 204,
+  })
+);
 
 server.use(express.json());
 

@@ -31,14 +31,9 @@ class ClienteController {
       const cliente = req.body;
       const connection = await mysql.createConnection(dbConfig);
       const sql = `INSERT INTO cliente (nome, cpf, email, senha) VALUES (?, ?, ?, md5(?))`;
-      const [results] = await connection.execute(sql, [
-        cliente.nome,
-        cliente.cpf,
-        cliente.email,  
-        cliente.senha       
-      ]);
+      const [results] = await connection.execute(sql, [cliente.nome, cliente.cpf, cliente.email, cliente.senha]);
 
-      return resp.json(results);
+      return resp.json({ ...cliente, id: results.insertId });
     } catch (error) {
       return resp.status(500).json(error);
     }
@@ -49,15 +44,15 @@ class ClienteController {
       const cliente = req.body;
       const connection = await mysql.createConnection(dbConfig);
       const sql = `UPDATE cliente SET nome = ?, cpf = ?, email = ?, senha = ? WHERE id = ?`;
-      const [results] = await connection.execute(sql, [
+      await connection.execute(sql, [
         cliente.nome,
         cliente.cpf,
         cliente.email,
-        cliente.senha,        
+        cliente.senha,
         cliente.id,
       ]);
 
-      return resp.json(results);
+      return resp.json(cliente);
     } catch (error) {
       return resp.status(500).json(error);
     }
@@ -67,7 +62,7 @@ class ClienteController {
     try {
       const id = req.params.id;
       const connection = await mysql.createConnection(dbConfig);
-      const sql = `DELETE FROM cliente WHERE id = ?`
+      const sql = `DELETE FROM cliente WHERE id = ?`;
       const [results] = await connection.execute(sql, [id]);
 
       return resp.json(results);
