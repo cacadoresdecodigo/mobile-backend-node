@@ -14,19 +14,15 @@ class localRetiradaController {
 
   async listar(req, resp) {
     try {
-      const filtro = req.query.filtro || "";
-
       const connection = await mysql.createConnection(dbConfig);
-      const sql = "SELECT * FROM local_retirada WHERE nome LIKE ?";
-      const [resultado] = await connection.execute(sql, [`%${filtro}%`]);
+      const sql = "SELECT * FROM local_retirada";
+      const [resultado] = await connection.execute(sql);
 
       return resp.json(resultado);
     } catch (error) {
       return resp.status(500).json(error);
     }
   }
-
-
 }
 
 module.exports = localRetiradaController;

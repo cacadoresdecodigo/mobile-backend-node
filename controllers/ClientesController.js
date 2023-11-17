@@ -43,12 +43,13 @@ class ClienteController {
     try {
       const cliente = req.body;
       const connection = await mysql.createConnection(dbConfig);
-      const sql = `UPDATE cliente SET nome = ?, cpf = ?, email = ?, senha = ? WHERE id = ?`;
+      const sql = `UPDATE cliente SET nome = ?, cpf = ?, email = ?, senha = ?, local_retirada_id = ? WHERE id = ?`;
       await connection.execute(sql, [
         cliente.nome,
         cliente.cpf,
         cliente.email,
         cliente.senha,
+        cliente.localRetiradaId,
         cliente.id,
       ]);
 
