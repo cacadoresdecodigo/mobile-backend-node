@@ -1,6 +1,8 @@
 const express = require("express");
 const ClienteController = require("./controllers/ClientesController");
 const LocalRetiradaController = require("./controllers/LocalRetiradaController");
+const PlanoController = require("./controllers/PlanoController");
+const PagamentoController = require("./controllers/PagamentoController");
 const cors = require("cors");
 
 
@@ -28,6 +30,18 @@ server.delete("/clientes/:id", clientesController.deletar);
 const localRetiradaController = new LocalRetiradaController();
 
 server.get("/local-retirada", localRetiradaController.listar);
+
+//ESCOLHER PLANO
+const planoController = new PlanoController();
+
+server.get("/plano", planoController.listar);
+
+
+//CADASTRAR PAGAMENTO
+const pagamentoController = new PagamentoController();
+
+server.post("/pagamento", pagamentoController.cadastrar);
+
 
 
 server.listen(3000);

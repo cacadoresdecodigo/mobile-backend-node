@@ -16,27 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `local_retirada`
+-- Table structure for table `plano`
 --
 
-DROP TABLE IF EXISTS `local_retirada`;
+DROP TABLE IF EXISTS `plano`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `local_retirada` (
+CREATE TABLE `plano` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
+  `valor` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `local_retirada`
+-- Dumping data for table `plano`
 --
 
-LOCK TABLES `local_retirada` WRITE;
-/*!40000 ALTER TABLE `local_retirada` DISABLE KEYS */;
-INSERT INTO `local_retirada` VALUES (1,'Floripa Shopping'),(2,'Shopping Beiramar'),(3,'Shopping Itaguaçu'),(4,'Continente Shopping');
-/*!40000 ALTER TABLE `local_retirada` ENABLE KEYS */;
+LOCK TABLES `plano` WRITE;
+/*!40000 ALTER TABLE `plano` DISABLE KEYS */;
+INSERT INTO `plano` VALUES (1,'4 retiradas/mês',19.90),(2,'8 retiradas/mês',45.90),(3,'19 retiradas/mês',99.90),(4,'+20 retiradas/mês',159.90);
+/*!40000 ALTER TABLE `plano` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-17 15:38:46
+-- Dump completed on 2023-11-27 17:07:47
