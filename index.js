@@ -3,8 +3,8 @@ const ClienteController = require("./controllers/ClientesController");
 const LocalRetiradaController = require("./controllers/LocalRetiradaController");
 const PlanoController = require("./controllers/PlanoController");
 const PagamentoController = require("./controllers/PagamentoController");
+const AutenticacaoController = require("./controllers/AutenticacaoController");
 const cors = require("cors");
-
 
 const server = express();
 server.use(
@@ -23,7 +23,7 @@ const clientesController = new ClienteController();
 
 server.get("/clientes", clientesController.listar);
 server.post("/clientes", clientesController.cadastrar);
-server.put("/clientes", clientesController.atualizar)
+server.put("/clientes", clientesController.atualizar);
 server.delete("/clientes/:id", clientesController.deletar);
 
 //ESCOLHER LOCAL RETIRADA
@@ -36,12 +36,17 @@ const planoController = new PlanoController();
 
 server.get("/plano", planoController.listar);
 
-
 //CADASTRAR PAGAMENTO
 const pagamentoController = new PagamentoController();
 
 server.post("/pagamento", pagamentoController.cadastrar);
+server.get("/pagamento/:id", pagamentoController.buscarPagamentoPeloId);
+server.put("/pagamento", pagamentoController.atualizar);
 
+// AUTENTICAR LOGIN
 
+const autenticacaoController = new AutenticacaoController();
+
+server.post("/logar", autenticacaoController.logar);
 
 server.listen(3000);
