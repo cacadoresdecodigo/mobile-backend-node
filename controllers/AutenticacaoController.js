@@ -1,13 +1,6 @@
-const mysql = require("mysql2/promise");
+const MysqlConnection = require("../database/mysql-connection");
 
-// Configurações de conexão ao banco de dados
-const dbConfig = {
-  host: "localhost",
-  port: "3306",
-  user: "root",
-  password: "root",
-  database: "teste-sa",
-};
+
 
 class AutenticacaoController {
   constructor() {}
@@ -15,7 +8,7 @@ class AutenticacaoController {
   async logar(req, resp) {
     try {
       const usuario = req.body;
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `SELECT * FROM cliente WHERE email = ? AND senha = md5(?)`;
       const [results] = await connection.execute(sql, [usuario.email, usuario.senha]);
 

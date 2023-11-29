@@ -1,13 +1,5 @@
-const mysql = require("mysql2/promise");
+const MysqlConnection = require("../database/mysql-connection");
 
-// Configurações de conexão ao banco de dados
-const dbConfig = {
-  host: "localhost",
-  port: "3306",
-  user: "root",
-  password: "root",
-  database: "teste-sa",
-};
 
 class ClienteController {
   constructor() {}
@@ -16,7 +8,7 @@ class ClienteController {
     try {
       const filtro = req.query.filtro || "";
 
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = "SELECT * FROM cliente WHERE nome LIKE ?";
       const [resultado] = await connection.execute(sql, [`%${filtro}%`]);
 
@@ -29,7 +21,7 @@ class ClienteController {
   async cadastrar(req, resp) {
     try {
       const cliente = req.body;
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `INSERT INTO cliente (nome, cpf, email, senha) VALUES (?, ?, ?, md5(?))`;
       const [results] = await connection.execute(sql, [cliente.nome, cliente.cpf, cliente.email, cliente.senha]);
 
@@ -43,7 +35,7 @@ class ClienteController {
     try {
       const cliente = req.body;
 
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `UPDATE cliente SET nome = ?, cpf = ?, email = ?, senha = md5(?), local_retirada_id = ?, plano_id = ?, pagamento_id = ? WHERE id = ?`;
       await connection.execute(sql, [
         cliente.nome,
@@ -65,7 +57,7 @@ class ClienteController {
   async deletar(req, resp) {
     try {
       const id = req.params.id;
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `DELETE FROM cliente WHERE id = ?`;
       const [results] = await connection.execute(sql, [id]);
 

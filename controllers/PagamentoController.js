@@ -1,13 +1,4 @@
-const mysql = require("mysql2/promise");
-
-// Configurações de conexão ao banco de dados
-const dbConfig = {
-  host: "localhost",
-  port: "3306",
-  user: "root",
-  password: "root",
-  database: "teste-sa",
-};
+const MysqlConnection = require("../database/mysql-connection");
 
 class PagamentoController {
   constructor() {}
@@ -15,7 +6,7 @@ class PagamentoController {
   async cadastrar(req, resp) {
     try {
       const pagamento = req.body;
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `INSERT INTO pagamento (numero_cartao, nome, cpf, validade, cvv) VALUES (?, ?, ?, ?, ?)`;
       const [results] = await connection.execute(sql, [
         pagamento.numeroCartao,
@@ -36,7 +27,7 @@ class PagamentoController {
     try {
       const id = req.params.id;
 
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = "SELECT * FROM pagamento WHERE id = ?";
       const [resultado] = await connection.execute(sql, [id]);
 
@@ -49,7 +40,7 @@ class PagamentoController {
   async atualizar(req, resp) {
     try {
       const pagamento = req.body;
-      const connection = await mysql.createConnection(dbConfig);
+      const connection = await new MysqlConnection().getConnection();
       const sql = `UPDATE pagamento SET numero_cartao = ?, nome = ?, cpf = ?, validade = ?, cvv = ? WHERE id = ?`;
       await connection.execute(sql, [
         pagamento.numeroCartao,
