@@ -42,6 +42,7 @@ const pagamentoController = new PagamentoController();
 server.post("/pagamento", pagamentoController.cadastrar);
 server.get("/pagamento/:id", pagamentoController.buscarPagamentoPeloId);
 server.put("/pagamento", pagamentoController.atualizar);
+server.delete("/pagamento/:id", pagamentoController.deletar);
 
 // AUTENTICAR LOGIN
 

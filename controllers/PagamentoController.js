@@ -57,6 +57,20 @@ class PagamentoController {
       return resp.status(500).json(error);
     }
   }
+
+  async deletar(req, resp) {
+    try {
+      const id = req.params.id;
+      const connection = await new MysqlConnection().getConnection();      
+      
+      const sql = `DELETE FROM pagamento WHERE id = ?`;
+      const [results] = await connection.execute(sql, [id]);
+
+      return resp.json(results);
+    } catch (error) {
+      return resp.status(500).json(error);
+    }
+  }
 }
 
 module.exports = PagamentoController;

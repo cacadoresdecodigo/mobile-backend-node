@@ -1,6 +1,5 @@
 const MysqlConnection = require("../database/mysql-connection");
 
-
 class ClienteController {
   constructor() {}
 
@@ -58,6 +57,7 @@ class ClienteController {
     try {
       const id = req.params.id;
       const connection = await new MysqlConnection().getConnection();
+
       const sql = `DELETE FROM cliente WHERE id = ?`;
       const [results] = await connection.execute(sql, [id]);
 
