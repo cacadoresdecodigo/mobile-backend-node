@@ -38,7 +38,7 @@ CREATE TABLE `cliente` (
   CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`local_retirada_id`) REFERENCES `local_retirada` (`id`),
   CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`plano_id`) REFERENCES `plano` (`id`),
   CONSTRAINT `cliente_ibfk_3` FOREIGN KEY (`pagamento_id`) REFERENCES `pagamento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +47,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1000,'Maria','111.111.111-11','maria@mail.com','202cb962ac59075b964b07152d234b70',1,1,1),(1001,'Carlos','222.222.222-22','carlos@mail.com','202cb962ac59075b964b07152d234b70',1,1,2);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-29 17:01:36
+-- Dump completed on 2023-12-05 10:39:54
